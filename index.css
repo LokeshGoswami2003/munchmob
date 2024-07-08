@@ -56,3 +56,6 @@ body {
 .filter-btn {
     cursor: pointer;
 }
+button {
+    padding: 3px 5px;
+}
