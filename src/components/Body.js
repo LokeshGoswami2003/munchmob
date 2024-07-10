@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function Body() {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -22,8 +23,24 @@ function Body() {
                 json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
                     ?.restaurants;
             console.log(fetchedRestaurentList);
-            setListOfRestaurants(fetchedRestaurentList);
-            setFilteredListOfRestaurants(fetchedRestaurentList);
+
+            const additionalRestaurants = await fetch(
+                "https://www.swiggy.com/api/seo/getListing?lat=23.019122496546565&lng=72.59185981269482"
+            );
+            const moreRestaurantData = await additionalRestaurants.json();
+            const moreRestaurantDatalist =
+                moreRestaurantData.data.success.cards[1].card.card.gridElements
+                    .infoWithStyle.restaurants;
+            console.log(moreRestaurantDatalist);
+            const finalList = [
+                ...new Set([
+                    ...fetchedRestaurentList,
+                    ...moreRestaurantDatalist,
+                ]),
+            ];
+            console.log(finalList);
+            setListOfRestaurants(finalList);
+            setFilteredListOfRestaurants(finalList);
         } catch (error) {
             console.log(error);
         }
@@ -71,10 +88,12 @@ function Body() {
             <div className="res-container">
                 {filteredListOfRestaurants.map((restaurant) => {
                     return (
-                        <RestaurantCard
+                        <Link
+                            to={"/restaurant/" + restaurant.info.id}
                             key={restaurant.info.id}
-                            resData={restaurant}
-                        />
+                        >
+                            <RestaurantCard resData={restaurant} />
+                        </Link>
                     );
                 })}
             </div>
