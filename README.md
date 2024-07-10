@@ -7,17 +7,15 @@ Munch Mob is a social media platform designed for food enthusiasts to connect, s
 ## Features
 
 - **User Authentication**: Secure user registration and login.
-- **Profile Management**: Customize your profile and preferences.
-- **Post Creation**: Share your food experiences through posts.
+- **Profile Management**: Customize your profile and preferences..
 - **Interactions**: Like, comment, and share posts from other users.
 - **Real-time Updates**: Stay connected with real-time notifications.
 
 ## Technologies Used
 
 - **Front-End**: React.js, Redux
-- **Back-End**: Node.js, Express.js, MongoDB
-- **API Integration**: Axios
-- **Deployment**: Heroku, AWS
+- **API Integration**: swiggy 
+- **Deployment**: netlify
 
 ## Installation
 
