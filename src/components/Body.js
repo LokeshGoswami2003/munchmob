@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import getRestaurantsList from "../utils/useGetRestaurantsList";
 
 function Body() {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -9,48 +10,43 @@ function Body() {
         []
     );
     const [searchKeyword, setSearchKeyword] = useState("");
+    const [searchKeywordAdd, setSearchKeywordAdd] = useState("");
+
     useEffect(() => {
-        fetchData();
+        const fetchAndSetRestaurantListData = async () => {
+            const RestaurantListData = await getRestaurantsList([
+                "26.95250",
+                "75.71050",
+            ]);
+        };
+        console.log(restaurantListData);
     }, []);
-    const fetchData = async () => {
-        try {
-            const data = await fetch(
-                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.95250&lng=75.71050&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-            );
-            const json = await data.json();
-            console.log(json); //  json.data.cards[4].card.card
-            const fetchedRestaurentList =
-                json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-                    ?.restaurants;
-            console.log(fetchedRestaurentList);
 
-            const additionalRestaurants = await fetch(
-                "https://www.swiggy.com/api/seo/getListing?lat=23.019122496546565&lng=72.59185981269482"
-            );
-            const moreRestaurantData = await additionalRestaurants.json();
-            const moreRestaurantDatalist =
-                moreRestaurantData.data.success.cards[1].card.card.gridElements
-                    .infoWithStyle.restaurants;
-            console.log(moreRestaurantDatalist);
-            const finalList = [
-                ...new Set([
-                    ...fetchedRestaurentList,
-                    ...moreRestaurantDatalist,
-                ]),
-            ];
-            console.log(finalList);
-            setListOfRestaurants(finalList);
-            setFilteredListOfRestaurants(finalList);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    return listOfRestaurants.length === 0 ? (
+    if (listOfRestaurants === undefined)
+        return <h1>no restaurants in your area</h1>;
+    return listOfRestaurants?.length === 0 ? (
         <Shimmer />
     ) : (
         <div className="body">
             <div className="filter">
+                <input
+                    type="text"
+                    value={searchKeywordAdd}
+                    onChange={(e) => {
+                        console.log(e.target.value);
+                        setSearchKeywordAdd(e.target.value);
+                    }}
+                />
+
+                <button
+                    className="search"
+                    onClick={() => {
+                        console.log("search location called");
+                        fetchAreaData();
+                    }}
+                >
+                    search for Area
+                </button>
                 <input
                     type="text"
                     value={searchKeyword}
@@ -86,7 +82,7 @@ function Body() {
                 </button>
             </div>
             <div className="res-container">
-                {filteredListOfRestaurants.map((restaurant) => {
+                {filteredListOfRestaurants?.map((restaurant) => {
                     return (
                         <Link
                             to={"/restaurant/" + restaurant.info.id}
