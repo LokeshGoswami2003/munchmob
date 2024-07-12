@@ -1,4 +1,4 @@
-const getRestaurantsList = async ([lat, lng]) => {
+const getRestaurantsData = async ([lat, lng]) => {
     try {
         const restaurantsSearchApiString =
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=" +
@@ -23,4 +23,4 @@ const getRestaurantsList = async ([lat, lng]) => {
         console.log(error);
     }
 };
-export default getRestaurantsList;
+export default getRestaurantsData;

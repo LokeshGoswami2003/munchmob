@@ -2,87 +2,34 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import getRestaurantsList from "../utils/useGetRestaurantsList";
+import setRestaurants from "../utils/useSetRestaurants";
+import FilterRestaurants from "./FilterRestaurants";
 
 function Body() {
-    const [listOfRestaurants, setListOfRestaurants] = useState([]);
-    const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
-        []
-    );
-    const [searchKeyword, setSearchKeyword] = useState("");
-    const [searchKeywordAdd, setSearchKeywordAdd] = useState("");
+    const [restaurantsList, setRestaurantsList] = useState([]);
+    const [restaurantsListDisplay, setRestaurantsListDisplay] = useState([]);
 
     useEffect(() => {
-        const fetchAndSetRestaurantListData = async () => {
-            const RestaurantListData = await getRestaurantsList([
-                "26.95250",
-                "75.71050",
-            ]);
-        };
-        console.log(restaurantListData);
+        setRestaurants([setRestaurantsList, ["26.95250", "75.71050"]]);
     }, []);
-
-    if (listOfRestaurants === undefined)
+    useEffect(() => {
+        setRestaurantsListDisplay(restaurantsList);
+        console.log("restaurantsListDisplay updated to ", restaurantsList);
+    }, [restaurantsList]);
+    if (restaurantsList === undefined) {
         return <h1>no restaurants in your area</h1>;
-    return listOfRestaurants?.length === 0 ? (
-        <Shimmer />
-    ) : (
+    }
+    if (restaurantsList.length === 0) {
+        return <Shimmer />;
+    }
+    return (
         <div className="body">
-            <div className="filter">
-                <input
-                    type="text"
-                    value={searchKeywordAdd}
-                    onChange={(e) => {
-                        console.log(e.target.value);
-                        setSearchKeywordAdd(e.target.value);
-                    }}
-                />
-
-                <button
-                    className="search"
-                    onClick={() => {
-                        console.log("search location called");
-                        fetchAreaData();
-                    }}
-                >
-                    search for Area
-                </button>
-                <input
-                    type="text"
-                    value={searchKeyword}
-                    onChange={(e) => {
-                        setSearchKeyword(e.target.value);
-                    }}
-                />
-                <button
-                    className="search"
-                    onClick={() => {
-                        const filterdList = listOfRestaurants.filter(
-                            (restaurant) => {
-                                return restaurant?.info?.name
-                                    ?.toLowerCase()
-                                    ?.includes(searchKeyword.toLowerCase());
-                            }
-                        );
-                        setFilteredListOfRestaurants(filterdList);
-                    }}
-                >
-                    search
-                </button>
-                <button
-                    className="filter-btn"
-                    onClick={() => {
-                        const filterdList = listOfRestaurants.filter(
-                            (res) => res.info.avgRating > 4
-                        );
-                        setFilteredListOfRestaurants(filterdList);
-                    }}
-                >
-                    Top Rated Restaurants
-                </button>
-            </div>
+            <FilterRestaurants
+                setRestaurantsListDisplay={setRestaurantsListDisplay}
+                restaurantsList={restaurantsList}
+            />
             <div className="res-container">
-                {filteredListOfRestaurants?.map((restaurant) => {
+                {restaurantsListDisplay?.map((restaurant) => {
                     return (
                         <Link
                             to={"/restaurant/" + restaurant.info.id}
@@ -98,3 +45,11 @@ function Body() {
 }
 
 export default Body;
+// const fetchAndSetRestaurantListData = async () => {
+//     const RestaurantListData = await getRestaurantsList([
+//         "26.95250",
+//         "75.71050",
+//     ]);
+//     const
+// };
+// console.log(restaurantListData);
