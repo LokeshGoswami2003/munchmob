@@ -2,24 +2,22 @@ import React from "react";
 import reactDOM from "react-dom/client";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import {
-    createBrowserRouter,
-    Outlet,
-    Route,
-    RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import RestaurantCard from "./components/RestaurantCard";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Error from "./components/Error";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const App = () => {
     return (
-        <div className="app">
-            <Header />
-            <Outlet />
-        </div>
+        <Provider store={appStore}>
+            <div className="app">
+                <Header />
+                <Outlet />
+            </div>
+        </Provider>
     );
 };
 const appRouter = createBrowserRouter([
