@@ -1,41 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
+import DarkModeButton from "./DarkModeButton";
 
 function Header() {
-    const [btnName, setBtnName] = useState("Login");
     return (
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo-image" src={logo} alt="Logo" />
+        <div className="navbar bg-base-200">
+            <div className="flex-1">
+                <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
-            <div className="nav-items">
-                <ul>
-                    <Link to="/">
-                        <li>Home</li>
-                    </Link>
+            <div className="flex-none">
+                <ul className="menu menu-horizontal px-1">
+                    <li>
+                        <a>Link</a>
+                    </li>
 
-                    <Link to="/about">
-                        <li>About</li>
-                    </Link>
-
-                    <Link to="/contact">
-                        <li>Contact</li>
-                    </Link>
-
-                    <Link to="/cart">
-                        <li>Cart</li>
-                    </Link>
-
-                    <button
-                        onClick={() => {
-                            setBtnName(
-                                btnName === "Login" ? "Logout" : "Login"
-                            );
-                        }}
-                    >
-                        {btnName}
-                    </button>
+                    <DarkModeButton />
                 </ul>
             </div>
         </div>
