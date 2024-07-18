@@ -15,14 +15,15 @@ function Body() {
     const restaurantListDisplay = useSelector(
         (store) => store.data.restaurantListDisplay
     );
+    const location = useSelector((store) => store.locationData.location);
+    console.log(location);
+    const lat = location[0];
+    const lng = location[1];
     console.log("log1:", restaurantList, restaurantListDisplay);
     const dispatch = useDispatch();
     useEffect(() => {
         const FillData = async () => {
-            const restaurantListData = await getRestaurantListData([
-                "12.9716",
-                "77.5946",
-            ]);
+            const restaurantListData = await getRestaurantListData([lat, lng]);
             console.log("log2", restaurantListData);
             const restaurantList = filterRestaurantList(restaurantListData);
             console.log("RestaurantList : ", restaurantList);
@@ -30,7 +31,7 @@ function Body() {
             dispatch(resetRestaurantListDisplay());
         };
         FillData();
-    }, []);
+    }, [location]);
 
     if (restaurantList === undefined) {
         return <h1>no restaurants in your area</h1>;
@@ -39,8 +40,8 @@ function Body() {
         return <Shimmer />;
     }
     return (
-        <div className="body">
-            <div className="res-container">
+        <div className="bg-primary px-10">
+            <div className="flex flex-wrap justify-between gap-4">
                 {restaurantListDisplay?.map((restaurant) => {
                     return (
                         <Link
@@ -57,48 +58,3 @@ function Body() {
 }
 
 export default Body;
-// const fetchAndSetRestaurantListData = async () => {
-//     const RestaurantListData = await getRestaurantsList([
-//
-//
-//     ]);
-//     const
-// };
-// console.log(restaurantListData);
-/**import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateRestaurantList, updateRestaurantListDisplay, resetRestaurantsListDisplay } from "./dataSlice";
-
-const RestaurantComponent = () => {
-    const dispatch = useDispatch();
-    const restaurantList = useSelector((state) => state.data.restaurantList);
-    const restaurantsListDisplay = useSelector((state) => state.data.restaurantsListDisplay);
-
-    useEffect(() => {
-        // Simulate fetching data
-        const fetchedRestaurants = [
-            { id: 1, name: "Restaurant 1" },
-            { id: 2, name: "Restaurant 2" },
-        ];
-
-        // Update restaurant list
-        dispatch(updateRestaurantList(fetchedRestaurants));
-
-        // Optionally, update the display list
-        dispatch(updateRestaurantListDisplay(fetchedRestaurants));
-    }, [dispatch]);
-
-    return (
-        <div>
-            <h1>Restaurants</h1>
-            <ul>
-                {restaurantsListDisplay.map((restaurant) => (
-                    <li key={restaurant.id}>{restaurant.name}</li>
-                ))}
-            </ul>
-            <button onClick={() => dispatch(resetRestaurantsListDisplay())}>Reset Display List</button>
-        </div>
-    );
-};
-
-export default RestaurantComponent;**/

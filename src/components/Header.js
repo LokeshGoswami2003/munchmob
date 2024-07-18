@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/logo1.png";
 import { Link } from "react-router-dom";
-import DarkModeButton from "./DarkModeButton";
+import LogoImage from "./LogoImage";
+import LocationSection from "./LocationSection";
 
 function Header() {
     return (
-        <div className="navbar bg-base-200">
-            <div className="flex-1">
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+        <div className="flex justify-between bg-primary text-dark py-2 px-20">
+            <div className="flex items-center space-x-8">
+                <LogoImage />
+                <LocationSection />
             </div>
-            <div className="flex-none">
-                <ul className="menu menu-horizontal px-1">
+            <div className="flex items-center">
+                <ul className="flex space-x-12">
                     <li>
-                        <a>Link</a>
+                        <Link>Home</Link>
                     </li>
 
-                    <DarkModeButton />
+                    <li>
+                        <Link>About</Link>
+                    </li>
+
+                    <li>
+                        <Link>Contact</Link>
+                    </li>
+
+                    <li>
+                        <Link>Cart</Link>
+                    </li>
                 </ul>
             </div>
         </div>

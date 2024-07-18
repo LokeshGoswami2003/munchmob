@@ -9,6 +9,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Error from "./components/Error";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import "antd/./dist/antd.js";
 
 const App = () => {
     return (
