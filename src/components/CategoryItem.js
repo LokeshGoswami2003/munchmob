@@ -25,6 +25,7 @@ const CategoryItem = ({ item, inCart }) => {
                     <button
                         className="mt-2 bg-dark text-white py-1 px-3 rounded hover:bg-secondary transition duration-300"
                         onClick={() => {
+                            setToAdd(false);
                             dispatch(addItem(item));
                         }}
                     >
@@ -34,6 +35,7 @@ const CategoryItem = ({ item, inCart }) => {
                     <button
                         className="mt-2 bg-dark text-white py-1 px-3 rounded hover:bg-secondary transition duration-300"
                         onClick={() => {
+                            setToAdd(true);
                             dispatch(removeItem(item));
                         }}
                     >
