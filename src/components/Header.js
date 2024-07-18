@@ -7,25 +7,27 @@ function Header() {
     return (
         <div className="flex justify-between bg-primary text-dark py-2 px-20">
             <div className="flex items-center space-x-8">
-                <LogoImage />
+                <Link to={"/"}>
+                    <LogoImage />
+                </Link>
                 <LocationSection />
             </div>
             <div className="flex items-center">
                 <ul className="flex space-x-12">
                     <li>
-                        <Link>Home</Link>
+                        <Link to={"/"}>Home</Link>
                     </li>
 
                     <li>
-                        <Link>About</Link>
+                        <Link to={"/about"}>About</Link>
                     </li>
 
                     <li>
-                        <Link>Contact</Link>
+                        <Link to={"/contact"}>Contact</Link>
                     </li>
 
                     <li>
-                        <Link>Cart</Link>
+                        <Link to={"/cart"}>Cart</Link>
                     </li>
                 </ul>
             </div>
