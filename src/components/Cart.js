@@ -16,7 +16,7 @@ const Cart = () => {
     };
 
     return (
-        <div className="bg-secondary p-6 rounded-lg shadow-lg">
+        <div className="bg-primary p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-dark mb-4">Your Cart</h2>
             {cartItems.length === 0 ? (
                 <p className="text-dark">Your cart is empty</p>
