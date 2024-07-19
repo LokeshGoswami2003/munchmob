@@ -39,10 +39,11 @@ function RestaurantMenu() {
 
     const fetchRestaurantDetails = async () => {
         const rawRestaurantMenuData = await fetch(
-            `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${lat}&lng=${lng}&restaurantId=${resId}`
+            `http://34.100.226.1:3000/api/menu?lat=${lat}&lng=${lng}&restaurantId=${resId}`
         );
         const restaurantMenuData = await rawRestaurantMenuData.json();
         const restaurantMenuDataCards = restaurantMenuData.data.cards;
+        console.log(restaurantMenuDataCards);
         const menuItemsCategoryArray = filterMenuItemsArray(
             restaurantMenuDataCards
         );

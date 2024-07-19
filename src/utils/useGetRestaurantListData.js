@@ -1,12 +1,6 @@
 const getRestaurantListData = async ([lat, lng]) => {
     try {
-        const restaurantListSearchApiString =
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=" +
-            lat +
-            "&lng=" +
-            lng +
-            "&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
-
+        const restaurantListSearchApiString = `http://34.100.226.1:3000/api/restaurants?lat=${lat}&lng=${lng}`;
         const data = await fetch(restaurantListSearchApiString);
 
         if (!data) {

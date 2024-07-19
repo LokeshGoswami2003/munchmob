@@ -22,6 +22,7 @@ const App = () => {
         </Provider>
     );
 };
+
 const appRouter = createBrowserRouter([
     {
         path: "/",
