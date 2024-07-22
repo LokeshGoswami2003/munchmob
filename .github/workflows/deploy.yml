@@ -20,12 +20,10 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  cd munchmob
                   npm install
 
             - name: Build React app
               run: |
-                  cd munchmob
                   npm run build
 
             - name: Deploy to server
