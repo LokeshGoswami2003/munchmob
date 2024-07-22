@@ -11,19 +11,21 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
                   node-version: "20"
 
             - name: Install dependencies
               run: |
+                  cd munchmob
                   npm install
 
             - name: Build React app
               run: |
+                  cd munchmob
                   npm run build
 
             - name: Deploy to server
@@ -34,4 +36,4 @@ jobs:
                   echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh -o StrictHostKeyChecking=no lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/build"
-                  scp -i ~/.ssh/id_rsa -r build lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
+                  scp -i ~/.ssh/id_rsa -r munchmob/build lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
