@@ -1,0 +1,37 @@
+name: Deploy React App
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20"
+
+            - name: Install dependencies
+              run: |
+                  npm install
+
+            - name: Build React app
+              run: |
+                  npm run build
+
+            - name: Deploy to server
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh -o StrictHostKeyChecking=no lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/build"
+                  scp -i ~/.ssh/id_rsa -r build lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
