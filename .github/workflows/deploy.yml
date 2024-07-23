@@ -42,7 +42,7 @@ jobs:
 
             - name: Remove existing build directory
               run: |
-                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/build"
+                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/dist"
 
             - name: Deploy to server
               run: |
