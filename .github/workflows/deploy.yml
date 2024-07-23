@@ -21,6 +21,9 @@ jobs:
             - name: Install dependencies
               run: npm install
 
+            - name: build the app
+              run: npm run build
+
             - name: Log SSH private key
               run: |
                   echo "Logging SSH private key..."
