@@ -16,23 +16,29 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: "20"
+                  node-version: "20.15.1"
 
             - name: Install dependencies
-              run: |
-                  npm install
+              run: npm install
 
-            - name: Build React app
-              run: |
-                  npm run build
+            - name: build app
+              run: parcel build index.html
 
-            - name: Deploy to server
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Test SSH connection
+              run: |
+                  ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} lokesh_goswami_2003@34.100.226.1 "echo 'SSH connection successful'"
+
+            - name: Prepare SSH
               run: |
                   mkdir -p ~/.ssh
                   echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan 34.100.226.1 >> ~/.ssh/known_hosts
-                  ssh -o StrictHostKeyChecking=no lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/build"
-                  scp -i ~/.ssh/id_rsa -r munchmob/dist lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
+
+            - name: Remove existing build directory
+              run: |
+                  ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa lokesh_goswami_2003@34.100.226.1 "rm -rf /home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/build"
+
+            - name: Deploy to server
+              run: |
+                  scp -r -i ~/.ssh/id_rsa ./dist lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
