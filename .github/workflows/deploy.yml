@@ -46,4 +46,4 @@ jobs:
 
             - name: Deploy to server
               run: |
-                  scp -r -i ~/.ssh/id_rsa ./dist lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend
+                  scp -r -i ~/.ssh/id_rsa ./dist lokesh_goswami_2003@34.100.226.1:/home/lokesh_goswami_2003/munchmob-app/munchmob-frontend/dist
