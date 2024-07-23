@@ -1,6 +1,6 @@
 const getRestaurantListData = async ([lat, lng]) => {
     try {
-        const restaurantListSearchApiString = `http://34.100.226.1:3000/api/restaurants?lat=${lat}&lng=${lng}`;
+        const restaurantListSearchApiString = `https://www.munchmob.online/api/restaurants?lat=${lat}&lng=${lng}`;
         const data = await fetch(restaurantListSearchApiString);
 
         if (!data) {

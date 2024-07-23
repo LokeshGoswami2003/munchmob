@@ -39,7 +39,7 @@ function RestaurantMenu() {
 
     const fetchRestaurantDetails = async () => {
         const rawRestaurantMenuData = await fetch(
-            `http://34.100.226.1:3000/api/menu?lat=${lat}&lng=${lng}&restaurantId=${resId}`
+            `https://www.munchmob.online/api/menu?lat=${lat}&lng=${lng}&restaurantId=${resId}`
         );
         const restaurantMenuData = await rawRestaurantMenuData.json();
         const restaurantMenuDataCards = restaurantMenuData.data.cards;
