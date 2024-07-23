@@ -24,8 +24,10 @@ jobs:
             - name: build app
               run: parcel build index.html
 
-            - name: log ssh key
-              run: echo "SSH connection successful ${{ secrets.SSH_PRIVATE_KEY }}"
+            - name: Log SSH private key
+              run: |
+                  echo "Logging SSH private key..."
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
             - name: Test SSH connection
               run: |
