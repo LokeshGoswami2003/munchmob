@@ -24,6 +24,9 @@ jobs:
             - name: build app
               run: parcel build index.html
 
+            - name: log ssh key
+              run: echo "SSH connection successful ${{ secrets.SSH_PRIVATE_KEY }}"
+
             - name: Test SSH connection
               run: |
                   ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} lokesh_goswami_2003@34.100.226.1 "echo 'SSH connection successful'"
