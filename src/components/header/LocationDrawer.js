@@ -1,9 +1,9 @@
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import React, { useEffect, useRef, useState } from "react";
-import fetchLocationData from "../utils/useFetchLocationData";
+import fetchLocationData from "../../utils/useFetchLocationData";
 import { useDispatch } from "react-redux";
-import { updateLocation } from "../utils/locationSlice";
-import Alert from "./Alert";
+import { updateLocation } from "../../utils/locationSlice";
+import Alert from "../additionalpages/Alert";
 
 const LocationDrawer = ({ isOpen, setIsOpen }) => {
     const inputRef = useRef(null);

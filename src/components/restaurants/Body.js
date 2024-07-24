@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import Shimmer from "./Shimmer";
+import Shimmer from "../additionalpages/Shimmer";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
     resetRestaurantListDisplay,
     updateRestaurantList,
-} from "../utils/dataSlice";
-import getRestaurantListData from "../utils/useGetRestaurantListData";
-import filterRestaurantList from "../utils/useFilterRestaurantList";
+} from "../../utils/dataSlice";
+import getRestaurantListData from "../../utils/useGetRestaurantListData";
+import filterRestaurantList from "../../utils/useFilterRestaurantList";
 
 function Body() {
     const restaurantList = useSelector((store) => store.data.restaurantList);
@@ -32,7 +32,6 @@ function Body() {
         };
         FillData();
     }, [location]);
-
     if (restaurantList === undefined) {
         return <h1>no restaurants in your area</h1>;
     }
@@ -40,18 +39,17 @@ function Body() {
         return <Shimmer />;
     }
     return (
-        <div className="bg-primary px-10">
-            <div className="flex flex-wrap justify-between gap-4">
-                {restaurantListDisplay?.map((restaurant) => {
-                    return (
-                        <Link
-                            to={"/restaurant/" + restaurant.info.id}
-                            key={restaurant.info.id}
-                        >
-                            <RestaurantCard resData={restaurant} />
-                        </Link>
-                    );
-                })}
+        <div className="bg-primary px-4 sm:px-6 md:px-10">
+            <div className="flex flex-wrap justify-center gap-4">
+                {restaurantListDisplay?.map((restaurant) => (
+                    <Link
+                        to={`/restaurant/${restaurant.info.id}`}
+                        key={restaurant.info.id}
+                        className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4"
+                    >
+                        <RestaurantCard resData={restaurant} />
+                    </Link>
+                ))}
             </div>
         </div>
     );

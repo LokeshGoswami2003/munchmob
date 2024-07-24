@@ -1,5 +1,5 @@
 import React from "react";
-import { IMG_CDN_URL } from "../utils/constants";
+import { IMG_CDN_URL } from "../../utils/constants";
 
 function RestaurantCard(props) {
     const { resData } = props;
