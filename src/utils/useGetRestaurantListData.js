@@ -8,7 +8,7 @@ const getRestaurantListData = async ([lat, lng]) => {
         }
         const restaurantListData = await data.json();
 
-        console.log("json data of restaurants list is : ", restaurantListData);
+        console.log("json data of restaurants list is: ", restaurantListData);
         return restaurantListData;
     } catch (error) {
         console.log("Error in useGetRestaurentListData");
