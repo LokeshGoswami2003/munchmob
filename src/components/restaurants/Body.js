@@ -39,17 +39,18 @@ function Body() {
         return <Shimmer />;
     }
     return (
-        <div className="bg-primary px-4 sm:px-6 md:px-10">
+        <div className="bg-primary px-10">
             <div className="flex flex-wrap justify-center gap-4">
-                {restaurantListDisplay?.map((restaurant) => (
-                    <Link
-                        to={`/restaurant/${restaurant.info.id}`}
-                        key={restaurant.info.id}
-                        className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4"
-                    >
-                        <RestaurantCard resData={restaurant} />
-                    </Link>
-                ))}
+                {restaurantListDisplay?.map((restaurant) => {
+                    return (
+                        <Link
+                            to={"/restaurant/" + restaurant.info.id}
+                            key={restaurant.info.id}
+                        >
+                            <RestaurantCard resData={restaurant} />
+                        </Link>
+                    );
+                })}
             </div>
         </div>
     );

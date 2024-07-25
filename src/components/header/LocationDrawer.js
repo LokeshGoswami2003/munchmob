@@ -96,11 +96,11 @@ const LocationDrawer = ({ isOpen, setIsOpen }) => {
                         className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     ></div>
-                    <div className="fixed top-0 left-0 h-full w-2/5 bg-white shadow-lg transform translate-x-0 transition-transform duration-300 ease-in-out location-drawer">
-                        <div className="pt-10 pl-24 space-y-6 pr-10 relative">
+                    <div className="fixed top-0 left-0 h-full w-full md:w-2/5 bg-white shadow-lg transform translate-x-0 transition-transform duration-300 ease-in-out">
+                        <div className="pt-10 pl-6 md:pl-24 space-y-6 pr-6 md:pr-10 relative">
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className=" text-gray-600"
+                                className="text-gray-600"
                             >
                                 <CloseOutlined style={{ fontSize: "24px" }} />
                             </button>
