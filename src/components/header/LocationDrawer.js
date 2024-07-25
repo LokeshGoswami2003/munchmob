@@ -7,6 +7,7 @@ import Alert from "../additionalpages/Alert";
 
 const LocationDrawer = ({ isOpen, setIsOpen }) => {
     const inputRef = useRef(null);
+    const drawerRef = useRef(null);
     const autocompleteServiceRef = useRef(null);
     const [suggestions, setSuggestions] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
@@ -15,7 +16,11 @@ const LocationDrawer = ({ isOpen, setIsOpen }) => {
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
-            if (!e.target.closest(".location-drawer") && isOpen) {
+            if (
+                drawerRef.current &&
+                !drawerRef.current.contains(e.target) &&
+                isOpen
+            ) {
                 setIsOpen(false);
             }
         };
@@ -96,7 +101,10 @@ const LocationDrawer = ({ isOpen, setIsOpen }) => {
                         className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     ></div>
-                    <div className="fixed top-0 left-0 h-full w-full md:w-2/5 bg-white shadow-lg transform translate-x-0 transition-transform duration-300 ease-in-out">
+                    <div
+                        ref={drawerRef}
+                        className="fixed top-0 left-0 h-full w-full md:w-2/5 bg-white shadow-lg transform translate-x-0 transition-transform duration-300 ease-in-out location-drawer"
+                    >
                         <div className="pt-10 pl-6 md:pl-24 space-y-6 pr-6 md:pr-10 relative">
                             <button
                                 onClick={() => setIsOpen(false)}
